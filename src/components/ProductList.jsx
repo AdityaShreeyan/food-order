@@ -14,7 +14,7 @@ function ProductList() {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6">Desserts</h1>
-      <div className="grid grid-cols-3 gap-12">
+      <div className="grid grid-cols-3 gap-6">
         {products.map((product, index) => (
           <ProductCard key={index} product={product} />
         ))}

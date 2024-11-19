@@ -8,9 +8,13 @@ function Cart() {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
   };
 
+  const calculateItemCount = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
+  };
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-semibold text-orange-600">Your Cart ({cartItems.length})</h2>
+      <h2 className="text-2xl font-semibold mb-3 text-orange-600">Your Cart ({calculateItemCount()})</h2>
 
       {cartItems.length === 0 ? (
         <div>
@@ -20,19 +24,39 @@ function Cart() {
       ) : (
         <div>
           {cartItems.map((item) => (
-            <div key={item.id} className="flex justify-between items-center py-2">
+            <div key={item.id} className="flex justify-between items-center py-2 border-b">
               <div>
-                <h3 className="text-lg">{item.name}</h3>
-                <p className="text-gray-500">${item.price.toFixed(2)} x {item.quantity}</p>
+                <h3 className="text-sm">{item.name}</h3>
+                <span className="text-orange-500 text-sm">{item.quantity}x</span>
+                <span className="ml-3 text-sm text-[#CAAFA7]">@ ${item.price.toFixed(2)}</span>
+                <span className="ml-2 text-sm text-[#a0624e]">${(item.price * item.quantity).toFixed(2)}</span>
               </div>
-              <p className="font-bold">${(item.price * item.quantity).toFixed(2)}</p>
-              <button onClick={() => removeFromCart(item.id)} className="text-gray-500 hover:text-red-500">
-                <img src="/images/icon-remove-item.svg" alt="Remove" className="w-5 h-5" />
+              <button
+                onClick={() => removeFromCart(item.id)}
+                className="rounded-full border-2 border-[#CAAFA7] w-6 h-6"
+              >
+                <img
+                  src="/images/icon-remove-item.svg"
+                  alt="Remove"
+                  className="w-[14px] h-[14px] ml-[3px]"
+                />
               </button>
             </div>
           ))}
-          <div className="border-t mt-4 pt-4">
-            <p className="text-xl font-bold text-red-600">Total: ${calculateTotal()}</p>
+          
+          <div className="mt-4 pt-2 flex justify-between items-center">
+            <span className="text-sm text-gray-500">Order Total</span>
+            <span className="text-2xl font-bold text-[#3b1b10]">${calculateTotal()}</span>
+          </div>
+          <div className="mt-4">
+            <div className="flex justify-center items-center gap-2 bg-[#fff8f0] py-3">
+              <img
+                src="./images/icon-carbon-neutral.svg"
+                alt="Carbon Neutral Icon"
+                className="w-5 h-5"
+              />
+              <p className='text-sm'>This is a <span className='font-bold'>carbon-neutral</span> delivery</p>
+            </div>
           </div>
           <button className="bg-orange-600 text-white py-2 px-4 rounded-full w-full mt-4">
             Confirm Order

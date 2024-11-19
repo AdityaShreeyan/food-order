@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '../useContext/CartContext';
 
 function ProductCard({ product }) {
   const [quantity, setQuantity] = useState(0);
-  const { addToCart } = useCart();
+  const { addToCart, cartItems } = useCart();
+
+  useEffect(() => {
+    const itemInCart = cartItems.find((item) => item.id === product.id);
+    if (!itemInCart) {
+      setQuantity(0); // Reset quantity if item is removed from cart
+    }
+  }, [cartItems, product.id]);
 
   const handleIncrement = () => {
     const newQuantity = quantity + 1;
@@ -12,13 +19,9 @@ function ProductCard({ product }) {
   };
 
   const handleDecrement = () => {
-    const newQuantity = quantity > 0 ? quantity - 1 : 0;
+    const newQuantity = Math.max(quantity - 1, 0);
     setQuantity(newQuantity);
-    if (newQuantity > 0) {
-      addToCart(product, newQuantity);
-    } else {
-      addToCart(product, 0); // This will help handle item removal logic later
-    }
+    addToCart(product, newQuantity);
   };
 
   return (
@@ -27,7 +30,7 @@ function ProductCard({ product }) {
         <img
           src={product.image.desktop}
           alt={product.name}
-          className={`w-[450px] h-[350px] object-cover shadow-lg rounded-lg ${quantity > 0 ? 'border-2 border-orange-500' : ''}`}
+          className={`w-full h-[250px] object-cover shadow-lg rounded-lg ${quantity > 0 ? 'border-2 border-orange-500' : ''}`}
         />
 
         {quantity === 0 ? (
@@ -61,7 +64,7 @@ function ProductCard({ product }) {
         )}
       </div>
 
-      <div className="p-4">
+      <div className="p-4 mt-3">
         <p className="text-sm text-gray-500">{product.category}</p>
         <h2 className="text-lg font-semibold">{product.name}</h2>
         <p className="text-xl font-bold text-red-600">${product.price.toFixed(2)}</p>

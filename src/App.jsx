@@ -6,9 +6,9 @@ import { CartProvider } from './useContext/CartContext';
 function App() {
   return (
     <CartProvider>
-    <div className="flex min-h-screen p-16 bg-[#fff8f0]">
+    <div className="flex min-h-screen p-8 bg-[#fff8f0]">
       {/* Product List Section */}
-      <div className="w-3/4 pr-16">
+      <div className="w-3/4 pr-8">
         <ProductList />
       </div>
 
