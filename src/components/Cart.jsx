@@ -17,9 +17,9 @@ function Cart() {
       <h2 className="text-2xl font-semibold mb-3 text-orange-600">Your Cart ({calculateItemCount()})</h2>
 
       {cartItems.length === 0 ? (
-        <div>
-          <img src="./images/illustration-empty-cart.svg" alt="Empty Cart" className="w-24 mx-auto my-4" />
-          <p className="text-gray-500 mt-4">Your added items will appear here</p>
+        <div className="flex flex-col items-center justify-center h-56">
+          <img src="./images/illustration-empty-cart.svg" alt="Empty Cart" className="w-40 mx-auto my-4" />
+          <p className="text-[#a0624e]">Your added items will appear here</p>
         </div>
       ) : (
         <div>

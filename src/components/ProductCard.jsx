@@ -30,13 +30,13 @@ function ProductCard({ product }) {
         <img
           src={product.image.desktop}
           alt={product.name}
-          className={`w-full h-[250px] object-cover shadow-lg rounded-lg ${quantity > 0 ? 'border-2 border-orange-500' : ''}`}
+          className={`w-full h-full object-cover shadow-lg rounded-lg ${quantity > 0 ? 'border-2 border-orange-500' : ''}`}
         />
 
         {quantity === 0 ? (
           <button
             onClick={handleIncrement}
-            className="absolute w-40 bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 hover:border-orange-500 hover:text-orange-500 bg-white border border-gray-500 rounded-full px-5 py-2 flex items-center justify-center"
+            className="absolute w-40 bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 hover:border-orange-500 hover:text-orange-500 bg-white border border-[#a0624e] rounded-full px-5 py-2 flex items-center justify-center"
           >
             <img src="/images/icon-add-to-cart.svg" alt="Add to Cart" className="mr-1" />
             Add to Cart
